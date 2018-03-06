@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Purple Chat</title>
+    <!-- Add the socket.io client instance to expose the io global variable -->
+    <script src='/socket.io/socket.io.js'></script>
+    <script src='/chat.js'></script>
+  </head>
+  <body>
+    <div id="chat-container">
+      <div class="messaging-container">
+        <ul id="notifications">
+        </ul>
+        <div class='messages'>
+          <ul id="msgs"></ul>
+        </div>
+        <form id="message-form" class="input-container" autocomplete="off">
+          <input id="message-input" type="text" placeholder="Message" >
+          <i class="fa fa-comment send-btn" onclick="emitMessage()" aria-hidden="true" ></i>
+        </form>
+      </div>
+      <div id="chatRoom" >
+        <div id="userInfo">
+          <p>Logged in as</p>
+          <div class='user'>
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+            <h2 id='userName'></h2>
+          </div>
+        </div>
+        <div id='chatRoomContainer'>
+          <h3>Chat Room</h3>
+          <ul id="chatList"></ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
