@@ -1,4 +1,4 @@
-var socket = io();
+const socket = io();
 var clientUser = '';
 
 function userCheck(user) {
@@ -22,18 +22,34 @@ function displayMessage(msgs) {
   let messagesContainer = document.querySelector('.messages');
 
   for (var msg in msgs) {
-    if (msgs[msg].sender === clientUser) {
-      messageEls += "<li class='message clientUser'>\
-                      <h3 class='sender'>" + msgs[msg].sender + "</h3>\
-                      <p class=''text>" + msgs[msg].message + "</p>\
-                    </li>"
+    let messageId = formatMsgId(msgs[msg].message);
+  
+    if (msgs[msg - 1] && msgs[msg].sender === msgs[msg - 1].sender) {
+      if (msgs[msg].sender === clientUser) {
+        messageEls += "<li class='message clientUser addedMsg'>\
+                        <p id='"+ messageId + "' class='text'>" + msgs[msg].message + "</p>\
+                      </li>"
+      } else {
+        messageEls += "<li class='message addedMsg'>\
+                        <p id='"+ messageId + "' class='text'>" + msgs[msg].message + "</p>\
+                      </li>"
+      }
     } else {
-      messageEls += "<li class='message'>\
+      if (msgs[msg].sender === clientUser) {
+        messageEls += "<li class='message clientUser'>\
                       <h3 class='sender'>" + msgs[msg].sender + "</h3>\
-                      <p class=''text>" + msgs[msg].message + "</p>\
+                      <p id='"+ messageId + "' class='text'>" + msgs[msg].message + "</p>\
                     </li>"
+      } else {
+        messageEls += "<li class='message'>\
+                      <h3 class='sender'>" + msgs[msg].sender + "</h3>\
+                      <p id='"+ messageId + "' class='text'>" + msgs[msg].message + "</p>\
+                    </li>"
+      }  
     }
+
   }
+
   document.getElementById('msgs').innerHTML = messageEls;
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
@@ -85,4 +101,5 @@ window.addEventListener('DOMContentLoaded', function() {
     event.preventDefault();
     emitMessage(document.getElementById('message-input').value);
   }, false);
+
 });

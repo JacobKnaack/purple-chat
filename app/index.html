@@ -11,6 +11,7 @@
     <!-- Add the socket.io client instance to expose the io global variable -->
     <script src='/socket.io/socket.io.js'></script>
     <script src='/chat.js'></script>
+    <script src='../lib/util.js'></script>
   </head>
   <body>
     <div id="chat-container">
@@ -18,11 +19,17 @@
         <ul id="notifications">
         </ul>
         <div class='messages'>
-          <ul id="msgs"></ul>
+          <div class="msgPositioner"></div>
+          <ul id="msgs">
+          </ul>
         </div>
         <form id="message-form" class="input-container" autocomplete="off">
           <input id="message-input" type="text" placeholder="Message" >
-          <i class="fa fa-comment send-btn" onclick="emitMessage()" aria-hidden="true" ></i>
+          <i
+            class="fa fa-comment send-btn"
+            onclick="emitMessage(document.getElementById('message-input').value)"
+            aria-hidden="true">
+          </i>
         </form>
       </div>
       <div id="chatRoom" >
