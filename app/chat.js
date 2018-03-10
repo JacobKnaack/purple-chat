@@ -18,33 +18,32 @@ function emitMessage(message) {
 }
 
 function displayMessage(msgs) {
-  var messageEls = '';
+  let messageEls = '';
   let messagesContainer = document.querySelector('.messages');
+    
 
   for (var msg in msgs) {
+    // util method
     let messageId = formatMsgId(msgs[msg].message);
   
     if (msgs[msg - 1] && msgs[msg].sender === msgs[msg - 1].sender) {
       if (msgs[msg].sender === clientUser) {
-        messageEls += "<li class='message clientUser addedMsg'>\
+        messageEls += "<li id='"+msgs[msg].sender+"' class='message clientUser addedMsg'>\
                         <p id='"+ messageId + "' class='text'>" + msgs[msg].message + "</p>\
                       </li>"
       } else {
-        messageEls += "<li class='message addedMsg'>\
+        messageEls += "<li id='" + msgs[msg].sender +"' class='message addedMsg'>\
                         <p id='"+ messageId + "' class='text'>" + msgs[msg].message + "</p>\
                       </li>"
       }
     } else {
       if (msgs[msg].sender === clientUser) {
         messageEls += "<li class='message clientUser'>\
-                      <h3 class='sender'>" + msgs[msg].sender + "</h3>\
-                      <p id='"+ messageId + "' class='text'>" + msgs[msg].message + "</p>\
-                    </li>"
+                        <h3 class='sender'>" + msgs[msg].sender + "</h3>\
+                        <p id='"+ messageId + "' class='text'>" + msgs[msg].message + "</p>\
+                      </li>"
       } else {
-        messageEls += "<li class='message'>\
-                      <h3 class='sender'>" + msgs[msg].sender + "</h3>\
-                      <p id='"+ messageId + "' class='text'>" + msgs[msg].message + "</p>\
-                    </li>"
+        messageEls += messageTemplate(msgs[msg], messageId);
       }  
     }
 

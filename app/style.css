@@ -116,9 +116,7 @@ body {
 }
 
 .message {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  list-style-type: none;
   width: 85%;
   height: 60px !important;
   margin:25px auto 0 auto;
@@ -141,7 +139,7 @@ body {
 
 .message p {
   display: inline-block;
-  max-width: 95%;
+  width: auto;
   background-color: #ECEBF9;
   border-radius: 0 15px 15px 15px;
   padding: 5px;
