@@ -17,6 +17,10 @@ function emitMessage(message) {
   }
 }
 
+function emitBot(query) {
+  socket.emit('philbot', query);
+}
+
 function displayMessage(msgs) {
   let messageEls = '';
   let messagesContainer = document.querySelector('.messages');
@@ -53,8 +57,8 @@ function displayMessage(msgs) {
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-function displayNotification(note) {
-  let alertEl = "<li class='notification'>" + note + '</li>'
+function displayNotification(note, status) {
+  let alertEl = "<li class='notification'><span class='note'>"+ note +"</span>"+ status +"</li>"
   document.getElementById('notifications').innerHTML = alertEl
 }
 
@@ -92,13 +96,21 @@ window.addEventListener('DOMContentLoaded', function() {
     userConnection(users)
   });
 
-  socket.on('system notification', function(alert) {
-    displayNotification(alert);
+  socket.on('system notification', function(alert, stats) {
+    displayNotification(alert, stats);
   });
 
   document.querySelector('#message-form').addEventListener('submit', function(event){
+    let userInput = document.getElementById('message-input').value;
+
     event.preventDefault();
-    emitMessage(document.getElementById('message-input').value);
+
+    emitMessage(userInput);
+
+    if(userInput.startsWith('/pb')) {
+      emitBot(userInput);
+    }
+
   }, false);
 
 });

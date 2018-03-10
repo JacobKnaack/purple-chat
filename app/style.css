@@ -118,7 +118,7 @@ body {
 .message {
   list-style-type: none;
   width: 85%;
-  height: 60px !important;
+  height: 55px !important;
   margin:25px auto 0 auto;
 }
 
@@ -139,7 +139,7 @@ body {
 
 .message p {
   display: inline-block;
-  width: auto;
+  min-width: 60px !important;
   background-color: #ECEBF9;
   border-radius: 0 15px 15px 15px;
   padding: 5px;
