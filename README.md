@@ -1,6 +1,6 @@
 # purple-chat
 
-![Heroku](https://heroku-badge.herokuapp.com/?app=purple-chat)
+![Heroku](https://heroku-badge.herokuapp.com/?app=purple-chat) [Purple Chat Application](https://purple-chat.herokuapp.com)
 
 ## Anonymous chat application with Chatbot
 
