@@ -4,7 +4,9 @@ const formatMsgId = (text) => {
 
   result = textArray.map(char => {
     if (char === ' ') {
-      return '-'
+      return '-';
+    } else if (char === '\'') {
+      return '';
     }
     return char.toLowerCase();
   });

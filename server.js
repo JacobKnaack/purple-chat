@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const path = require('path');
-const io = require('socket.io')(http);
 
+const pythonShell = require('python-shell');
+const io = require('socket.io')(http);
 const PORT = process.env.PORT || 3000
 
 var clientUsers = []
@@ -42,12 +43,29 @@ io.on('connection', function(socket) {
   });
 
   socket.on('philbot', function(msg) {
-    msgs.push({
-      sender: 'Phil',
-      message: 'Thanks for talking to me, unfortunately I\'m not working yet :/'
-    });
+    var options = {
+      pythonOptions: ['-u'],
+      args: [msg]
+    };
 
-    io.emit('chat message', msgs);
+    pythonShell.run('chatbot.py', options, function(err, results) {
+      if (err) {
+        throw err;
+      } else if (results == null) {
+        msgs.push({
+          sender: 'Phil',
+          message: 'Couldn\'t understand you. Please try again...'
+        });
+      } else {
+        let message = results.toString();
+        msgs.push({
+          sender: 'Phil',
+          message: message
+        });
+      }
+  
+      io.emit('chat message', msgs);
+    });
   });
 });
 

@@ -118,12 +118,13 @@ body {
 .message {
   list-style-type: none;
   width: 85%;
-  height: 55px !important;
+  min-height: 55px;
   margin:25px auto 0 auto;
 }
 
-.addedMsg {
-  height: 30px !important;
+.message.addedMsg {
+  max-height: 30px !important;
+  min-height: 30px !important;
   margin-top: 0 !important;
 }
 
