@@ -1,4 +1,7 @@
 # purple-chat
+
+![Heroku](https://heroku-badge.herokuapp.com/?app=purple-chat)
+
 ## Anonymous chat application with Chatbot
 
  ### Installation on local machine:
