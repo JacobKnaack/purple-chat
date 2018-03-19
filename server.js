@@ -42,10 +42,10 @@ io.on('connection', function(socket) {
     io.emit('chat message', msgs);
   });
 
-  socket.on('philbot', function(msg) {
+  socket.on('philbot', function(msg, user) {
     var options = {
       pythonOptions: ['-u'],
-      args: [msg]
+      args: [msg, user]
     };
 
     pythonShell.run('chatbot.py', options, function(err, results) {

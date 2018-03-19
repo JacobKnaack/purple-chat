@@ -17,8 +17,8 @@ function emitMessage(message) {
   }
 }
 
-function emitBot(query) {
-  socket.emit('philbot', query);
+function emitBot(query, clientUser) {
+  socket.emit('philbot', query, clientUser);
 }
 
 function displayMessage(msgs) {
@@ -108,7 +108,7 @@ window.addEventListener('DOMContentLoaded', function() {
     emitMessage(userInput);
 
     if(userInput.startsWith('/pb')) {
-      emitBot(userInput);
+      emitBot(userInput, clientUser);
     }
 
   }, false);
